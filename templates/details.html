@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Image details</title>
+		<style>
+			img {
+				max-height: 400px;
+				max-width: 400px;
+			}
+		</style>
+		<script>
+			function deleteImage(imageId){
+				var xhr = new XMLHttpRequest();
+				xhr.open("DELETE", "../../images/" + imageId);
+				xhr.setRequestHeader("Accept","application/text");
+				xhr.onreadystatechange = function () {
+					if (this.readyState == 4) {
+						var status = this.responseText;
+						console.log(status)
+						if(status=='True'){
+							alert('Image deleted successfully')
+							document.location.href="../../";
+						}
+						else{
+							alert('Delete action failed.')
+						}
+					}
+				};
+				xhr.send(null);
+			}
+			
+		</script>
+	</head>
+    <body>
+		<h2>{{ details.image_title }}</h2>
+		<div>
+			<input type="button" value="Delete Image" onclick="deleteImage({{ details.image_id }});"/>
+			<br/>
+		</div>
+		<div>
+			<img src="../../images/{{ details.image_id }}"/></a>
+		</div>
+		<div>
+			<h3>Comments</h3>
+			<form action="comments" method="POST">
+				<textarea name="comment" rows="2" cols="20"></textarea>
+				<input type="submit" value="Add Comment"/>
+			</form>
+			<table>
+				<tbody>
+					{% for comment in comments %}
+					<tr>
+						<td>{{ comment.comment }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

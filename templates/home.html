@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ImageStack Home</title>
+		<style>
+			img {
+				max-height: 200px;
+				max-width: 200px;
+			}
+		</style>
+	</head>
+    <body>
+		<div>
+			<form action="images" method="POST" enctype="multipart/form-data">
+				<label for="image">Select photo: </label>
+				<input name="image" type="file" accept="image/*"/>
+				<input type="submit" value="Upload"/>
+			</form>
+		</div>
+		<div>
+			<h3>Uploaded by me</h3>
+			{% for image in own_images %}
+				<a href="images/{{ image['image_id'] }}/details"><img src="images/{{ image['image_id'] }}"/></a>
+			{% endfor %}
+		</div>
+		<div>
+			<h3>Other posts</h3>
+			{% for other in other_images %}
+				<a href="images/{{ other['image_id'] }}/details"><img src="images/{{ other['image_id'] }}"/></a>
+			{% endfor %}
+		</div>
+	</body>
+</html>
