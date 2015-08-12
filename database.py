@@ -11,7 +11,7 @@ import MySQLdb
 import MySQLdb.cursors
 
 #DB connection params
-_RDS_HOST_ADDR = 'mysqlone.co22szrummwy.us-west-2.rds.amazonaws.com'
+_RDS_HOST_ADDR = ''
 _RDS_PORT = 3306
 _DATABASE = 'imagestack'
 
@@ -24,7 +24,7 @@ _COMMENT_TABLE = 'T_COMMENT'
 # Create a DB connection object and returns it.
 def get_db():
     print 'Establishing db connection to - {}'.format(_DATABASE)
-    db = MySQLdb.connect(host=_RDS_HOST_ADDR, port=_RDS_PORT, db=_DATABASE, user='application', passwd='application')
+    db = MySQLdb.connect(host=_RDS_HOST_ADDR, port=_RDS_PORT, db=_DATABASE, user='', passwd='')
     return db
 
 def autheticate_user(user_id, hash_pwd):
